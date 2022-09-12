@@ -1,0 +1,29 @@
+{
+  "name": "cuidadoconelgato",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./app/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Faty232/CuidadoConElGato.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Faty232/CuidadoConElGato/issues"
+  },
+  "homepage": "https://github.com/Faty232/CuidadoConElGato#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "express-promise-router": "^4.1.1",
+    "sequelize": "^6.21.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
