@@ -1,7 +1,7 @@
 //Conexión a la base de datos
 const {Sequelize} = require("sequelize");
 
-const sequelize = new Sequelize('tienda', 'root', '2215', { //new creando un objeto
+const sequelize = new Sequelize('tienda2', 'root', '2215', { //new creando un objeto
     host: 'localhost',
     dialect: 'mysql'
 });
