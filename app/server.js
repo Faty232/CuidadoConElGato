@@ -1,7 +1,6 @@
 const express = require('express'); //Llamamos a Express
 const routerApi = require('./routes'); //Indicar donde estan mis rutas
 const app = express();
-const bodyparser =('body-parser'); //Se pueda mandar información por el body
 const port = process.env.PORT || 8888 //Establecer el puesto que queremos utilizar
 
 //Configuración del body parser

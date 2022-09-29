@@ -15,6 +15,7 @@ class EmpleadoModel{
             this.estado = empleado.estado;
             this.email = empleado.email;
             this.telefono = empleado.telefono;
+            if(empleado.contraseña) // Si esta la contraseña en el controlador
             this.contraseña = empleado.contraseña;
         }
     }
@@ -46,6 +47,29 @@ class EmpleadoModel{
             })   
     }
     //async getById
+
+    getById(idEmp,resultado){
+        Empleado.findOne({where: {id: idEmp}}).then((empleado) =>{
+            if(empleado){
+            resultado(null, empleado)
+            }else
+            resultado  ({message: "No hay ningún usuario con ese id: " +idEmp}, null)
+        }).catch((error) => {
+            resultado({message: error}, null);
+        }) 
+    }
+
+    update(idEmp, empleado, resultado){
+        Empleado.update(empleado,{ // Update table
+            where:{
+                id: idEmp
+            }
+        }).then((idUser) =>{
+            resultado(null,{id: idUser[0], ...empleado}) //...Evitar que te cree un dato con el mismo nombre
+        }).catch((error) => {
+            resultado({message: error}, null);
+        })
+    }
 }
 
 module.exports = EmpleadoModel

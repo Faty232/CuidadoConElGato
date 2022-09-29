@@ -6,7 +6,8 @@ const empleadoRouter = () => {
 
     router.post('/', empleado.create)
     router.get('/', empleado.getAll)
-
+    router.get('/:id', empleado.getById) //:id enviar parametros por medio de la url
+    router.patch('/:id', empleado.update)
     return router
 }
 
