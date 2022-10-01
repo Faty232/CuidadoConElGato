@@ -1,6 +1,5 @@
 //Se hace petición a la base de datos
 const bcrypt = require('bcrypt'); //Encriptar contraseña
-const { create } = require('../controllers/empleado');
 const { Empleado } = require('../orm/tables');
 
 //Constructor con una clase
@@ -66,6 +65,18 @@ class EmpleadoModel{
             }
         }).then((idUser) =>{
             resultado(null,{id: idUser[0], ...empleado}) //...Evitar que te cree un dato con el mismo nombre
+        }).catch((error) => {
+            resultado({message: error}, null);
+        })
+    }
+
+    delete(idEmp, resultado){
+        Empleado.destroy({ // Delete table
+            where:{
+                id: idEmp
+            }
+        }).then((idUser) =>{
+            resultado(null,{id: idUser[0]}) //...Evitar que te cree un dato con el mismo nombre
         }).catch((error) => {
             resultado({message: error}, null);
         })
