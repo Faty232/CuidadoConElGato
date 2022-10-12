@@ -4,6 +4,7 @@ const categoriaRouter = require('./categoria');
 const marcaRouter = require('./marca');
 const distribuidorRouter = require('./distribuidor');
 const proveedorRouter = require('./proveedor');
+const tipoPrendaRouter = require('./tipoPrenda');
 console.log(process.env.NAME_DB);
 
 function routerApi(app){
@@ -15,6 +16,7 @@ function routerApi(app){
     router.use('/marca', marcaRouter());
     router.use('/distribuidor', distribuidorRouter());
     router.use('/proveedor', proveedorRouter());
+    router.use('/tipoPrenda', tipoPrendaRouter());
 
     return router
 }
