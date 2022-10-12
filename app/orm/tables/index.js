@@ -76,5 +76,6 @@ module.exports ={
     TipoPrenda,
     Categoria,
     Proveedor,
-    Almacen
+    Almacen,
+    Marca
  } 

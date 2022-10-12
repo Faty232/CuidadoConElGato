@@ -1,6 +1,9 @@
 const express = require('express-promise-router'); //Manejar las rutas(url)
 const empleadoRouter = require('./empleado');
 const categoriaRouter = require('./categoria');
+const marcaRouter = require('./marca');
+const distribuidorRouter = require('./distribuidor');
+const proveedorRouter = require('./proveedor');
 console.log(process.env.NAME_DB);
 
 function routerApi(app){
@@ -8,7 +11,10 @@ function routerApi(app){
     app.use('/api', router)
 
     router.use('/empleado', empleadoRouter());
-    router.use('/categoria', categoriaRouter())
+    router.use('/categoria', categoriaRouter());
+    router.use('/marca', marcaRouter());
+    router.use('/distribuidor', distribuidorRouter());
+    router.use('/proveedor', proveedorRouter());
 
     return router
 }

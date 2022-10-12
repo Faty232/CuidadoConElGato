@@ -2,6 +2,10 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config')
 
 const Distribuidor = sequelize.define('Distribuidor', {
+    nombre:{
+        type: DataTypes.STRING(50),
+        allowNull: false
+    },
     telefono:{
         type: DataTypes.STRING(10),
         allowNull: false

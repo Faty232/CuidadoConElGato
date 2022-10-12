@@ -5,24 +5,30 @@ const { Distribuidor } = require('../orm/tables');
 class DistribuidorModel{
     constructor(distribuidor){
         if(distribuidor){
+            this.nombre = distribuidor.nombre;
             this.telefono = distribuidor.telefono;
             this.email = distribuidor.email;
             this.municipio = distribuidor.municipio;
-            this.esatdo = distribuidor.esatdo;
+            this.estado = distribuidor.estado;
+            this.cp = distribuidor.cp;
+            this.fechaEnt = distribuidor.fechaEnt;
         }
     }
 
     //Insertar en la base de datos
-    async create(categoria,resultado){
-        Categoria.findOrCreate({
-            where: {nombre: categoria.nombre},
-            defaults: categoria }).then(([categoria, created])=>{
+    async create(distribuidor,resultado){
+        Distribuidor.findOrCreate({
+            where: {nombre: distribuidor.nombre},
+            defaults: distribuidor }).then(([distribuidor, created])=>{
                 if(created){
-                    resultado(null,categoria); 
+                    resultado(null,distribuidor); 
                 }else{
-                    resultado({message: 'La categoria ya existe'}, null); 
+                    resultado({message: 'El distribuidor ya existe'}, null); 
                 }
         }).catch((error) =>{
             resultado({message: error}, null);
         })
     }
+}
+
+module.exports = DistribuidorModel

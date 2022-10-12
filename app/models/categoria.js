@@ -58,6 +58,4 @@ class CategoriaModel{
     }
 }
 
-
-
 module.exports = CategoriaModel
