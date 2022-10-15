@@ -1,7 +1,10 @@
 //Conexión a la base de datos
 const {Sequelize} = require("sequelize");
 
-const sequelize = new Sequelize(process.env.NAME_DB, process.env.USER_DB, process.env.PASSWORD_DB ,{ //new creando un objeto
+console.log(process.env.NAME_DB);
+console.log(process.env.USER_DB);
+console.log(process.env.PASSWORD_DB);
+const sequelize = new Sequelize(process.env.NAME_DB, process.env.USER_DB, process.env.PASSWORD_DB || "" ,{ //new creando un objeto
     host: process.env.HOST_DB ,
     port: process.env.PORT_DB,
     dialect: 'mysql'

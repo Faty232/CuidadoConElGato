@@ -1,4 +1,5 @@
 //Creación de la base de datos
+require('dotenv').config();
 const sequelize = require('./config')
 
 require('./tables') //Usando directamente la carpeta

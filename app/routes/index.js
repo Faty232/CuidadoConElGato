@@ -5,6 +5,8 @@ const marcaRouter = require('./marca');
 const distribuidorRouter = require('./distribuidor');
 const proveedorRouter = require('./proveedor');
 const tipoPrendaRouter = require('./tipoPrenda');
+const clienteRouter = require('./cliente');
+const almacenRouter = require('./almacen');
 console.log(process.env.NAME_DB);
 
 function routerApi(app){
@@ -17,6 +19,8 @@ function routerApi(app){
     router.use('/distribuidor', distribuidorRouter());
     router.use('/proveedor', proveedorRouter());
     router.use('/tipoPrenda', tipoPrendaRouter());
+    router.use('/cliente', clienteRouter());
+    router.use('/almacen', almacenRouter());
 
     return router
 }
