@@ -1,4 +1,4 @@
-const MarcaModel = require('../models/marca');
+const DireEntModel = require('../models/direEnt');
 
 exports.create = (req, res) => {
     if(Object.entries(req.body).length === 0) //Convierte en un arreglo en objeto
@@ -6,22 +6,25 @@ exports.create = (req, res) => {
         message: "El body esta vacío"
     })
 
-    const {nombre} = req.body //req.body es el que contiene los datos
+    const {direccion, cp, estado} = req.body //req.body es el que contiene los datos
     //undefined, null, false, 0
-    if(!nombre){ //! si no le estas pasando un nombre
+    if(!direccion || !cp || !estado){ //! si no le estas pasando un dato
         res.status(400).send({
             message: "Los datos estan incompletos"
         })
     }
 
-    const marca = new MarcaModel({
-        nombre: req.body.nombre
+    const direEnt = new DireEntModel({
+        direccion: req.body.direccion,
+        cp: req.body.cp,
+        estado: req.body.estado,
+        ClienteId: req.body.ClienteId
     })
 
-    marca.create(marca,(error, data) => {
+    direEnt.create(direEnt,(error, data) => {
         if(error)
           res.status(500).send({
-            message: error.message || 'Algo ocurrio mientras se creo la marca'
+            message: error.message || 'Algo ocurrio mientras se creo la dirección de entrega'
           })
           else
             res.send({ 
@@ -32,8 +35,8 @@ exports.create = (req, res) => {
 }
 
 exports.getAll = (req, res) => {
-    const marca = new MarcaModel()
-    marca.getAll((error, datas) =>{
+    const direEnt = new DireEntModel()
+    direEnt.getAll((error, datas) =>{
         if(error)
          res.status(500).send({
             message: error.message || 'Algo ocurrio mientras se obtenian los datos'
@@ -49,22 +52,25 @@ exports.update = (req, res) => {
         message: "El body esta vacío"
     })
 
-    const {nombre} = req.body //req.body es el que contiene los datos
+    const {direccion, cp, estado, ClienteId} = req.body //req.body es el que contiene los datos
     //undefined, null, false, 0
-    if(!nombre){
+    if(!direccion || !cp || !estado || !ClienteId){
         res.status(400).send({
             message: "Los datos estan incompletos"
         })
     }
 
-    const marca = new MarcaModel({ // Objeto con los nuevos datos
-        nombre: req.body.nombre
+    const direEnt = new DireEntModel({ // Objeto con los nuevos datos
+        direccion: req.body.direccion,
+        cp: req.body.cp,
+        estado: req.body.estado,
+        ClienteId: req.body.ClienteId
     })
 
-    marca.update(req.params.id,marca,(error, data) => { //req todo lo que se envia por  postman
+    direEnt.update(req.params.id,direEnt,(error, data) => { //req todo lo que se envia por  postman
         if(error)
           res.status(500).send({
-            message: error.message || 'Algo ocurrio mientras se modifico la marca'
+            message: error.message || 'Algo ocurrio mientras se modifico la dirección de entrega'
           })
           else
             res.send({ 
@@ -75,9 +81,8 @@ exports.update = (req, res) => {
 }
 
 exports.delete = (req, res) => { //req todo lo que se envia por  postman
-    const marca = new MarcaModel() //Objeto
-    marca.delete(req.params.id,(error,data) => {
-        console.log(data)
+    const direEnt = new DireEntModel() //Objeto
+    direEnt.delete(req.params.id,(error,data) => {
         if(error)
          res.status(500).send({
             message: error.message || 'Algo ocurrio mientras se obtenian los datos'
@@ -85,9 +90,8 @@ exports.delete = (req, res) => { //req todo lo que se envia por  postman
          else
             res.send({
                 //Si data tiene algo eliminalo de lo contrario el usuario ya no existe
-                message: "Se elimino correctamente la marca: "
+                message: "Se elimino correctamente la dirección de entrega "
             })
     })
 }
-
 

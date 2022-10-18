@@ -6,6 +6,7 @@ const clienteRouter = () => {
 
     router.post('/', cliente.create)
     router.get('/', cliente.getAll)
+    router.get('/:id', cliente.getById)
     router.put('/:id', cliente.update)
     router.delete('/:id', cliente.delete)
 

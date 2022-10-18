@@ -26,7 +26,7 @@ const Distribuidor = sequelize.define('Distribuidor', {
         type: DataTypes.INTEGER(5),
         allowNull: false
     },
-    fechEnt:{
+    fechaEnt:{
         type: DataTypes.DATEONLY,
         allowNull: false
     }

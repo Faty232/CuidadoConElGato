@@ -5,6 +5,9 @@ const almacenRouter = () => {
     const router = express.default()
 
     router.post('/', almacen.create)
+    router.get('/', almacen.getAll)
+    router.put('/:id', almacen.update)
+    router.delete('/:id', almacen.delete)
 
     return router
 }

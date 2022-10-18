@@ -106,6 +106,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => { //req todo lo que se envia por  postman
     const empleado = new EmpleadoModel() //Objeto
     empleado.delete(req.params.id,(error,data) => {
+        console.log(data);
         if(error)
          res.status(500).send({
             message: error.message || 'Algo ocurrio mientras se obtenian los datos'
@@ -113,7 +114,7 @@ exports.delete = (req, res) => { //req todo lo que se envia por  postman
          else
             res.send({
                 //Si data tiene algo eliminalo de lo contrario el usuario ya no existe
-                message: data.id ?"Se elimino correctamente el empleado: " +data.id : "El usuario no existe en la base de datos"
+                message: "Se elimino correctamente el empleado: "
             })
     })
 }

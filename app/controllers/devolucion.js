@@ -1,4 +1,5 @@
-const MarcaModel = require('../models/marca');
+const DevolucionModel = require('../models/devolucion');
+const pedidoClieRouter = require('../routes/pedidoClie');
 
 exports.create = (req, res) => {
     if(Object.entries(req.body).length === 0) //Convierte en un arreglo en objeto
@@ -6,22 +7,26 @@ exports.create = (req, res) => {
         message: "El body esta vacío"
     })
 
-    const {nombre} = req.body //req.body es el que contiene los datos
+    const {estatus, motivo, cantidad, total, PedidoClieId} = req.body //req.body es el que contiene los datos
     //undefined, null, false, 0
-    if(!nombre){ //! si no le estas pasando un nombre
+    if(estatus === undefined || !motivo || !cantidad || !total || !PedidoClieId){ //! si no le estas pasando un nombre
         res.status(400).send({
             message: "Los datos estan incompletos"
         })
     }
 
-    const marca = new MarcaModel({
-        nombre: req.body.nombre
+    const devolucion = new DevolucionModel({
+        estatus: req.body.estatus,
+        motivo: req.body.motivo,
+        cantidad: req.body.cantidad,
+        total: req.body.total,
+        PedidoClieId: req.body.PedidoClieId
     })
 
-    marca.create(marca,(error, data) => {
+    devolucion.create(devolucion,(error, data) => {
         if(error)
           res.status(500).send({
-            message: error.message || 'Algo ocurrio mientras se creo la marca'
+            message: error.message || 'Algo ocurrio mientras se creo la devolución'
           })
           else
             res.send({ 
@@ -32,8 +37,8 @@ exports.create = (req, res) => {
 }
 
 exports.getAll = (req, res) => {
-    const marca = new MarcaModel()
-    marca.getAll((error, datas) =>{
+    const devolucion = new DevolucionModel()
+    devolucion.getAll((error, datas) =>{
         if(error)
          res.status(500).send({
             message: error.message || 'Algo ocurrio mientras se obtenian los datos'
@@ -49,22 +54,26 @@ exports.update = (req, res) => {
         message: "El body esta vacío"
     })
 
-    const {nombre} = req.body //req.body es el que contiene los datos
+    const {estatus, motivo, cantidad, total, PedidoClieId} = req.body //req.body es el que contiene los datos
     //undefined, null, false, 0
-    if(!nombre){
+    if(estatus === undefined || !motivo || !cantidad || !total || !PedidoClieId){
         res.status(400).send({
             message: "Los datos estan incompletos"
         })
     }
 
-    const marca = new MarcaModel({ // Objeto con los nuevos datos
-        nombre: req.body.nombre
+    const devolucion = new DevolucionModel({ // Objeto con los nuevos datos
+        estatus: req.body.estatus,
+        motivo: req.body.motivo,
+        cantidad: req.body.cantidad,
+        total: req.body.total,
+        PedidoClieId: req.body.PedidoClieId
     })
 
-    marca.update(req.params.id,marca,(error, data) => { //req todo lo que se envia por  postman
+    devolucion.update(req.params.id,devolucion,(error, data) => { //req todo lo que se envia por  postman
         if(error)
           res.status(500).send({
-            message: error.message || 'Algo ocurrio mientras se modifico la marca'
+            message: error.message || 'Algo ocurrio mientras se modifico la devolución'
           })
           else
             res.send({ 
@@ -75,9 +84,8 @@ exports.update = (req, res) => {
 }
 
 exports.delete = (req, res) => { //req todo lo que se envia por  postman
-    const marca = new MarcaModel() //Objeto
-    marca.delete(req.params.id,(error,data) => {
-        console.log(data)
+    const devolucion = new DevolucionModel() //Objeto
+    devolucion.delete(req.params.id,(error,data) => {
         if(error)
          res.status(500).send({
             message: error.message || 'Algo ocurrio mientras se obtenian los datos'
@@ -85,9 +93,8 @@ exports.delete = (req, res) => { //req todo lo que se envia por  postman
          else
             res.send({
                 //Si data tiene algo eliminalo de lo contrario el usuario ya no existe
-                message: "Se elimino correctamente la marca: "
+                message: "Se elimino correctamente la devolución "
             })
     })
 }
-
 

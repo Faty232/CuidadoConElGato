@@ -2,6 +2,10 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config')
 
 const Producto = sequelize.define('Producto', {
+    nombre:{
+        type: DataTypes.STRING(50),
+        allowNull: false
+    },
     descripcion:{
         type: DataTypes.STRING(100),
         allowNull: false

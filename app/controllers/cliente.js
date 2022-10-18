@@ -110,7 +110,7 @@ exports.delete = (req, res) => { //req todo lo que se envia por  postman
          else
             res.send({
                 //Si data tiene algo eliminalo de lo contrario el usuario ya no existe
-                message: data.id ?"Se elimino correctamente el cliente: " +data.id : "El usuario no existe en la base de datos"
+                message: "Se elimino correctamente el cliente " 
             })
     })
 }

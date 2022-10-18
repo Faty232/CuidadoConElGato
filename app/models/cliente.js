@@ -19,7 +19,7 @@ class ClienteModel{
     //Insertar en la base de datos
     async create(cliente,resultado){
         Cliente.findOrCreate({
-            where: {nombre: cliente.nombre},
+            where: {email: cliente.email},
             defaults: cliente }).then(([cliente, created])=>{
                 if(created){
                     resultado(null,cliente); 
