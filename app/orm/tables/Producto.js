@@ -25,10 +25,6 @@ const Producto = sequelize.define('Producto', {
     estatus:{
         type: DataTypes.BOOLEAN,
         defaultValue: false
-    },
-    cantidad:{
-        type: DataTypes.INTEGER(100),
-        allowNull: false
     }
 })
 

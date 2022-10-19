@@ -3,7 +3,7 @@ const sequelize = require('../config')
 
 const Login = sequelize.define('Login', {
     token:{
-        type: DataTypes.STRING(64),
+        type: DataTypes.STRING(256),
         allowNull: false
     },
     fechCad:{

@@ -11,6 +11,7 @@ const productoRouter = require('./producto');
 const direEntRouter = require('./direEnt');
 const pedidoClieRouter = require('./pedidoClie');
 const devolucionRouter = require('./devolucion');
+const loginRouter = require('./login');
 console.log(process.env.NAME_DB);
 
 function routerApi(app){
@@ -29,6 +30,7 @@ function routerApi(app){
     router.use('/direEnt', direEntRouter());
     router.use('/pedidoClie', pedidoClieRouter());
     router.use('/devolucion', devolucionRouter());
+    router.use('/login', loginRouter());
 
     return router
 }

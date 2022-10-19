@@ -11,7 +11,6 @@ class ProductoModel{
             this.talla = producto.talla;
             this.precio = producto.precio;
             this.estatus = producto.estatus;
-            this.cantidad = producto.cantidad;
             this.TipoPrendaId = producto.TipoPrendaId;
             this.CategoriumId = producto.CategoriumId;
             this.ProveedorId = producto.ProveedorId;

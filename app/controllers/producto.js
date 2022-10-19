@@ -6,9 +6,9 @@ exports.create = (req, res) => {
         message: "El body esta vacío"
     })
 
-    const {nombre, descripcion, color, talla, precio, estatus, cantidad, TipoPrendaId, CategoriumId, ProveedorId, MarcaId} = req.body //req.body es el que contiene los datos
+    const {nombre, descripcion, color, talla, precio, estatus, TipoPrendaId, CategoriumId, ProveedorId, MarcaId} = req.body //req.body es el que contiene los datos
     //undefined, null, false, 0
-    if(!nombre || !descripcion || !color || !talla || !precio || estatus === undefined || !cantidad || !TipoPrendaId || !CategoriumId || !ProveedorId || !MarcaId){ //! si no le estas pasando un nombre
+    if(!nombre || !descripcion || !color || !talla || !precio || estatus === undefined || !TipoPrendaId || !CategoriumId || !ProveedorId || !MarcaId){ //! si no le estas pasando un nombre
         res.status(400).send({
             message: "Los datos estan incompletos"
         })
@@ -21,7 +21,6 @@ exports.create = (req, res) => {
         talla: req.body.talla,
         precio: req.body.precio,
         estatus: req.body.estatus,
-        cantidad: req.body.cantidad,
         TipoPrendaId: req.body.TipoPrendaId,
         CategoriumId: req.body.CategoriumId,
         ProveedorId: req.body.ProveedorId,
@@ -71,9 +70,9 @@ exports.update = (req, res) => {
         message: "El body esta vacío"
     })
 
-    const {nombre, descripcion, color, talla, precio, estatus, cantidad, TipoPrendaId, CategoriumId, ProveedorId, MarcaId } = req.body //req.body es el que contiene los datos
+    const {nombre, descripcion, color, talla, precio, estatus, TipoPrendaId, CategoriumId, ProveedorId, MarcaId } = req.body //req.body es el que contiene los datos
     //undefined, null, false, 0
-    if(!nombre || !descripcion || !color || !talla || !precio || estatus === undefined || !cantidad || !TipoPrendaId || !CategoriumId || !ProveedorId || !MarcaId){
+    if(!nombre || !descripcion || !color || !talla || !precio || estatus === undefined  || !TipoPrendaId || !CategoriumId || !ProveedorId || !MarcaId){
         res.status(400).send({
             message: "Los datos estan incompletos"
         })
@@ -86,7 +85,6 @@ exports.update = (req, res) => {
         talla: req.body.talla,
         precio: req.body.precio,
         estatus: req.body.estatus,
-        cantidad: req.body.cantidad,
         TipoPrendaId: req.body.TipoPrendaId,
         CategoriumId: req.body.CategoriumId,
         ProveedorId: req.body.ProveedorId,
