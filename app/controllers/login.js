@@ -30,3 +30,31 @@ exports.create = (req, res) => {
             })
     })
 }
+
+exports.getByToken = (req, res) =>{
+    const login = new LoginModel() //instancia
+    login.getByToken(req.params.token,(error, datas) =>{
+        if(error)
+        res.status(500).send({  
+            message: error.message || 'Algo ocurrio mientras se obtenia el inicio de sesion'
+        })
+        else
+          res.send(datas)
+    })
+}
+
+exports.logOut = (req, res) => { //req todo lo que se envia por  postman
+    const login = new LoginModel() //Objeto
+    login.logOut(req.params.token,(error,data) => {
+        console.log(data)
+        if(error)
+         res.status(500).send({
+            message: error.message || 'Algo ocurrio mientras se iniciaba sesión'
+         })
+         else
+            res.send({
+                //Si data tiene algo eliminalo de lo contrario el usuario ya no existe
+                message: "Se salio de la sesión correctamente "
+            })
+    })
+}

@@ -5,6 +5,8 @@ const loginRouter = () => {
     const router = express.default()
 
     router.post('/', login.create)
+    router.get('/:token', login.getByToken)
+    router.delete('/:token', login.logOut)
 
     return router
 }

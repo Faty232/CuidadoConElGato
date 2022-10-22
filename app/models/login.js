@@ -39,21 +39,24 @@ class LoginModel{
         })
     }
 
-    getAll(resultado){
-        Login.findAll().then((login) =>{
+    getByToken(token,resultado){
+        Login.findOne({where: {token: token}}).then((login) =>{
+            if(login){
             resultado(null, login)
+            }else
+            resultado  ({message: "No hay ningún inicio de sesión con ese token: " + token}, null)
         }).catch((error) => {
             resultado({message: error}, null);
-        })   
+        }) 
     }
 
-    update(idEmp, log, resultado){
-        Login.update(login,{ // Update table
+    logOut(token, resultado){
+        Login.destroy({ // Delete table
             where:{
-                id: idEmp
+                token: token
             }
-        }).then((idEmp) =>{
-            resultado(null,{id: idEmp[0], ...login}) //...Evitar que te cree un dato con el mismo nombre
+        }).then((token) =>{
+            resultado(null,{token: token[0]}) //...Evitar que te cree un dato con el mismo nombre
         }).catch((error) => {
             resultado({message: error}, null);
         })
