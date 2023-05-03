@@ -28,6 +28,17 @@ class ProveedorModel{
         })
     }
 
+    getById(idPro,resultado){
+        Proveedor.findOne({where: {id: idPro}}).then((proveedor) =>{
+            if(proveedor){
+            resultado(null, proveedor)
+            }else
+            resultado  ({message: "No hay ningún proveedor con ese id: " +idPro}, null)
+        }).catch((error) => {
+            resultado({message: error}, null);
+        }) 
+    }
+
     getAll(resultado){
         Proveedor.findAll().then((proveedor) =>{
             resultado(null, proveedor)

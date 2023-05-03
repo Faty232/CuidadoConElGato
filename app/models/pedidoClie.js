@@ -1,5 +1,5 @@
 //Se hace petición a la base de datos
-const { PedidoClie } = require('../orm/tables');
+const { PedidoClie, Empleado, Distribuidor, Cliente, DireEnt,Producto } = require('../orm/tables');
 
 //Constructor con una clase
 class PedidoClieModel{
@@ -27,7 +27,7 @@ class PedidoClieModel{
     }
 
     getAll(resultado){
-        PedidoClie.findAll().then((pedidoClie) =>{
+        PedidoClie.findAll({include: [Empleado,Distribuidor,Cliente,DireEnt,Producto]}).then((pedidoClie) =>{
             resultado(null, pedidoClie)
         }).catch((error) => {
             resultado({message: error}, null);

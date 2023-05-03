@@ -1,5 +1,5 @@
 //Se hace petición a la base de datos
-const { Almacen } = require('../orm/tables');
+const { Almacen, Producto } = require('../orm/tables');
 
 //Constructor con una clase
 class AlmacenModel{
@@ -20,11 +20,21 @@ class AlmacenModel{
     }
 
     getAll(resultado){
-        Almacen.findAll().then((almacen) =>{
+        Almacen.findAll({include: [Producto]}).then((almacen) =>{
             resultado(null, almacen)
         }).catch((error) => {
             resultado({message: error}, null);
         })   
+    }
+    getById(idAlm,resultado){
+        Almacen.findOne({where: {id: idAlm}}).then((almacen) =>{
+            if(almacen){
+            resultado(null, almacen)
+            }else
+            resultado  ({message: "No hay ningún almacen con ese id: " +idAlm}, null)
+        }).catch((error) => {
+            resultado({message: error}, null);
+        }) 
     }
 
     update(idAlm, almacen, resultado){

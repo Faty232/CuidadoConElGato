@@ -1,5 +1,5 @@
 //Se hace petición a la base de datos
-const { DireEnt } = require('../orm/tables');
+const { DireEnt, Cliente } = require('../orm/tables');
 
 //Constructor con una clase
 class DireEntModel{
@@ -22,11 +22,21 @@ class DireEntModel{
     }
 
     getAll(resultado){
-        DireEnt.findAll().then((direEnt) =>{
+        DireEnt.findAll({include: [Cliente]}).then((direEnt) =>{
             resultado(null, direEnt)
         }).catch((error) => {
             resultado({message: error}, null);
         })   
+    }
+    getById(idDire,resultado){
+        DireEnt.findOne({where: {id: idDire}}).then((direEnt) =>{
+            if(direEnt){
+            resultado(null, direEnt)
+            }else
+            resultado  ({message: "No hay ninguna dirección con ese id: " +idDire}, null)
+        }).catch((error) => {
+            resultado({message: error}, null);
+        }) 
     }
 
     update(idEnt, direEnt, resultado){

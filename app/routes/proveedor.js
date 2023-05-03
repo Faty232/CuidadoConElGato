@@ -6,6 +6,7 @@ const proveedorRouter = () => {
 
     router.post('/', proveedor.create)
     router.get('/', proveedor.getAll)
+    router.get('/:id', proveedor.getById)
     router.put('/:id', proveedor.update)
     router.delete('/:id', proveedor.delete)
 

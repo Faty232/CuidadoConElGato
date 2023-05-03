@@ -44,6 +44,17 @@ exports.getAll = (req, res) => {
             res.send(datas)
     })
 }
+exports.getById = (req, res) =>{
+    const almacen = new AlmacenModel() //instancia
+    almacen.getById(req.params.id,(error, datas) =>{
+        if(error)
+        res.status(500).send({  
+            message: error.message || 'Algo ocurrio mientras se obtenian los datos'
+        })
+        else
+          res.send(datas)
+    })
+}
 
 exports.update = (req, res) => {
     if(Object.entries(req.body).length === 0) //Convierte en un arreglo en objeto

@@ -6,6 +6,7 @@ const direEntRouter = () => {
 
     router.post('/', direEnt.create)
     router.get('/', direEnt.getAll)
+    router.get('/:id', direEnt.getById)
     router.put('/:id', direEnt.update)
     router.delete('/:id', direEnt.delete)
 

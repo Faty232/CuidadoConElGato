@@ -29,6 +29,17 @@ class DevolucionModel{
             resultado({message: error}, null);
         })   
     }
+    getById(idDev,resultado){
+        Devolucion.findOne({where: {id: idDev}}).then((devolucion) =>{
+            if(devolucion){
+            resultado(null, devolucion)
+            }else
+            resultado  ({message: "No hay ninguna devolución con ese id: " +idDev}, null)
+        }).catch((error) => {
+            resultado({message: error}, null);
+        }) 
+    }
+
 
     update(idDev, devolucion, resultado){
         Devolucion.update(devolucion,{ // Update table

@@ -6,6 +6,7 @@ const devolucionRouter = () => {
 
     router.post('/', devolucion.create)
     router.get('/', devolucion.getAll)
+    router.get('/:id', devolucion.getById)
     router.put('/:id', devolucion.update)
     router.delete('/:id', devolucion.delete)
 

@@ -6,6 +6,7 @@ const almacenRouter = () => {
 
     router.post('/', almacen.create)
     router.get('/', almacen.getAll)
+    router.get('/:id', almacen.getById)
     router.put('/:id', almacen.update)
     router.delete('/:id', almacen.delete)
 
