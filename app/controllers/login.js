@@ -1,6 +1,8 @@
 const LoginModel = require('../models/login');
 
 exports.create = (req, res) => {
+    const route = req.route
+    console.log(req)
     if(Object.entries(req.body).length === 0) //Convierte en un arreglo en objeto
     res.status(400).send({
         message: "El body esta vacío"
@@ -19,16 +21,28 @@ exports.create = (req, res) => {
         contraseña: req.body.contraseña
     })
 
-    login.create(login,(error, data) => {
-        if(error)
-          res.status(500).send({
-            message: error.message || 'Algo ocurrio mientras se creo el login'
-          })
-          else
-            res.send({ 
-                data 
+    if (route.path !== '/cliente')
+        login.create(login,(error, data) => {
+            if(error)
+            res.status(500).send({
+                message: error.message || 'Algo ocurrio mientras se creo el login'
             })
-    })
+            else
+                res.send({ 
+                    data 
+                })
+        })
+    else 
+        login.createCliente(login,(error, data) => {
+            if(error)
+            res.status(500).send({
+                message: error.message || 'Algo ocurrio mientras se creo el login'
+            })
+            else
+                res.send({ 
+                    data 
+                })
+        })
 }
 
 exports.getByToken = (req, res) =>{

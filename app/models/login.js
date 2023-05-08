@@ -1,5 +1,5 @@
 //Se hace petición a la base de datos
-const { Login, Empleado } = require('../orm/tables');
+const { Login, Cliente, Empleado } = require('../orm/tables');
 const bcrypt = require ('bcrypt');
 const {addDays} = require('date-fns');
 const jwt = require('jsonwebtoken');
@@ -29,7 +29,32 @@ class LoginModel{
                     fechCad: fecha,
                     token: token
                 }).then((respuesta)=>{
-                    resultado2(null, {message: 'Inicio sesión exitoso'})
+                    resultado2(null, {token: token})
+                }).catch(()=>{
+                    resultado2({message: 'No se pudo iniciar sesión.... Intetalo más tarde'})
+                })
+            }
+        }).catch((error) =>{
+            resultado2({message: 'Usuario o contraseña incorrecta'})
+        })
+    }
+    //Cliente
+    async createCliente(login,resultado2) {
+        Cliente.findOne({
+            where: {email: login.email}
+        }).then(async (sesion)=>{
+            const resultado = await bcrypt.compare(login.contraseña, sesion.dataValues.contraseña)
+            if(!resultado){
+                resultado({message: 'Usuario o contraseña incorrecta'})
+            }else{
+                const fecha = addDays(new Date(), 30)
+                const token = jwt.sign({email: login.email}, 'shhhhh')
+                Login.create({
+                    ClienteId: sesion.dataValues.id,  
+                    fechCad: fecha,
+                    token: token
+                }).then((respuesta)=>{
+                    resultado2(null, {token: token})
                 }).catch(()=>{
                     resultado2({message: 'No se pudo iniciar sesión.... Intetalo más tarde'})
                 })
@@ -40,7 +65,7 @@ class LoginModel{
     }
 
     getByToken(token,resultado){
-        Login.findOne({where: {token: token}}).then((login) =>{
+        Login.findOne({where: {token: token}, include: [Empleado]}).then((login) =>{
             if(login){
             resultado(null, login)
             }else

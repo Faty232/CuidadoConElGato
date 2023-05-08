@@ -6,9 +6,9 @@ exports.create = (req, res) => {
         message: "El body esta vacío"
     })
 
-    const {nombre, tipo, direccion, colonia, cp, estado, email, telefono} = req.body //req.body es el que contiene los datos
+    const {nombre, tipo, direccion, colonia, cp, estado, email, telefono, contraseña} = req.body //req.body es el que contiene los datos
     //undefined, null, false, 0
-    if(!nombre || !tipo || !direccion || !colonia || !cp || !estado || !email || !telefono){ //! si no le estas pasando un nombre
+    if(!nombre || !tipo || !direccion || !colonia || !cp || !estado || !email || !telefono || !contraseña){ //! si no le estas pasando un nombre
         res.status(400).send({
             message: "Los datos estan incompletos"
         })
@@ -22,7 +22,8 @@ exports.create = (req, res) => {
         cp: req.body.cp,
         estado: req.body.estado,
         email: req.body.email,
-        telefono: req.body.telefono
+        telefono: req.body.telefono,
+        contraseña: req.body.contraseña
     })
 
     cliente.create(cliente,(error, data) => {
@@ -68,9 +69,9 @@ exports.update = (req, res) => {
         message: "El body esta vacío"
     })
 
-    const {nombre, tipo, direccion, colonia, cp, estado, email, telefono} = req.body //req.body es el que contiene los datos
+    const {nombre, tipo, direccion, colonia, cp, estado, email, telefono, contraseña} = req.body //req.body es el que contiene los datos
     //undefined, null, false, 0
-    if(!nombre || !tipo || !direccion || !colonia || !cp || !estado || !email || !telefono){
+    if(!nombre || !tipo || !direccion || !colonia || !cp || !estado || !email || !telefono || !contraseña){
         res.status(400).send({
             message: "Los datos estan incompletos"
         })
@@ -84,7 +85,8 @@ exports.update = (req, res) => {
         cp: req.body.cp,
         estado: req.body.estado,
         email: req.body.email,
-        telefono: req.body.telefono
+        telefono: req.body.telefono,
+        contraseña: req.body.contraseña
     })
 
     cliente.update(req.params.id,cliente,(error, data) => { //req todo lo que se envia por  postman

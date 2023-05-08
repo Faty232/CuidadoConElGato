@@ -16,6 +16,10 @@ const Almacen = require('./Almacen');
 Empleado.hasMany(Login); // El empleado puede tener 1 o muchos inicios de sesión
 Login.belongsTo(Empleado); //Login esta haciendo referencia a empleado
 
+//Foranea de Cliente a Login
+Cliente.hasMany(Login); 
+Login.belongsTo(Cliente); 
+
 //Foranea de Empleado a PedidoClie
 Empleado.hasMany(PedidoClie); 
 PedidoClie.belongsTo(Empleado);

@@ -1,5 +1,6 @@
 //Se hace petición a la base de datos
 const { Cliente } = require('../orm/tables');
+const bcrypt = require('bcrypt'); //Encriptar contraseña
 
 //Constructor con una clase
 class ClienteModel{
@@ -13,11 +14,13 @@ class ClienteModel{
             this.estado = cliente.estado;
             this.email = cliente.email;
             this.telefono = cliente.telefono;
+            this.contraseña = cliente.contraseña;
         }
     }
 
     //Insertar en la base de datos
     async create(cliente,resultado){
+        cliente.contraseña = await bcrypt.hash(cliente.contraseña, 10);
         Cliente.findOrCreate({
             where: {email: cliente.email},
             defaults: cliente }).then(([cliente, created])=>{
@@ -50,7 +53,8 @@ class ClienteModel{
         }) 
     }
 
-    update(idCli, cliente, resultado){
+    async update(idCli, cliente, resultado){
+        cliente.contraseña = await bcrypt.hash(cliente.contraseña, 10);
         Cliente.update(cliente,{ // Update table
             where:{
                 id: idCli

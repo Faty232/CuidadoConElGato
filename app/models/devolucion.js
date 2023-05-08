@@ -1,5 +1,5 @@
 //Se hace petición a la base de datos
-const { Devolucion } = require('../orm/tables');
+const { Devolucion, PedidoClie, Producto } = require('../orm/tables');
 
 //Constructor con una clase
 class DevolucionModel{
@@ -23,7 +23,10 @@ class DevolucionModel{
     }
 
     getAll(resultado){
-        Devolucion.findAll().then((devolucion) =>{
+        Devolucion.findAll({include: [{
+            model:PedidoClie, 
+            include: [Producto]
+        }, ]}).then((devolucion) =>{
             resultado(null, devolucion)
         }).catch((error) => {
             resultado({message: error}, null);

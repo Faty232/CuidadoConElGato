@@ -33,6 +33,10 @@ const Cliente = sequelize.define('Cliente', {
     telefono:{
         type: DataTypes.STRING(10),
         allowNull: false
+    },
+    contraseña:{
+        type: DataTypes.STRING(64),
+        allowNull: false
     }
 })
 
